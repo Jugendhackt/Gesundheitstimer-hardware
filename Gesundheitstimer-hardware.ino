@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //Datei erstellen mit den variablen onst char* ssid = ""; const char* password = "";
 #include "wlan_zugang.h"
 #include <WiFi.h>
