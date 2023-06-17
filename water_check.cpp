@@ -25,7 +25,7 @@ void water_check::reset(double menge_in_g){
 }
 
 void water_check::change_settings(double zielmenge, double zeit) {
-  zielmenge_in_g = zielmenge * 1000;
+  zielmenge_in_g = zielmenge;
   // Zeit in Millisecunden
   zeitintervall = (unsigned int)zeit * 60 * 1000;
   }
