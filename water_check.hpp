@@ -28,6 +28,6 @@ class water_check {
     water_check();
     // permant aufgerufende funktion
     timerstatus water_timer(double menge_in_g);
-    void change_settings(double zielmenge, double zeit);
+    void change_settings(double zielmenge, double zeit=60);
     void reset(double menge_in_g);
 };
