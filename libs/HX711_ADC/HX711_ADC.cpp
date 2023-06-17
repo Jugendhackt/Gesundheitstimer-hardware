@@ -7,7 +7,7 @@
 */
 
 #include <Arduino.h>
-#include <HX711_ADC.h>
+#include "HX711_ADC.h"
 
 
 HX711_ADC::HX711_ADC(uint8_t dout, uint8_t sck) //constructor
