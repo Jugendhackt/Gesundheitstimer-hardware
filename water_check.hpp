@@ -2,15 +2,15 @@
 #include "Arduino.h"
 
 enum timerstatus:int {
-  // Wage leer
+  // Waage leer
   keine_Flasche_vorhanden,
   // Flasche leer
   Flasche_ist_leer,
-  // Nichts getrunken, schlage Alarm
+  // nichts getrunken, schlage Alarm
   Schlage_Alarm,
-  // Genug getunken
+  // genug getunken
   genug_getrunken,
-  // Noch nicht genug getrunken, noch nicht nötig
+  // trinken noch nicht nötig
   trinken_nicht_noetig
 };
 
@@ -18,15 +18,15 @@ class water_check {
   private:
     unsigned int startMillis;
     double div;
-    // Eingestellte Zeit
+    // eingestellte Zeit
     int zeit_in_millis;
-    // Letztes Gewicht der der Flasche
+    // letztes Gewicht der Flasche
     double letzte_menge;
     double zielmenge_in_g;
     unsigned int zeitintervall;
   public:
     water_check();
-    // permant aufgerufende funktion
+    // permanent aufgerufende Funktion
     timerstatus water_timer(double menge_in_g);
     void change_settings(double zielmenge, double zeit=60);
     void reset(double menge_in_g);
