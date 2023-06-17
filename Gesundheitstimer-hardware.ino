@@ -1,6 +1,6 @@
 //Datei erstellen mit den variablen 
-const char* ssid = "jugendhackt"; const char* password = "jugendhackt23";
-//#include "wlan_zugang.h"
+// const char* ssid = ""; const char* password = "";
+#include "wlan_zugang.h"
 #include <WiFi.h>
 #include "netzwerk.hpp"
 #include "ScaleReader.hpp"
@@ -40,5 +40,6 @@ void loop(){
   }
 
   netzwerksteuerung.Sendewasserstand(zustand_in_g);
+  netzwerksteuerung.Sendepotiwert(poti_value);
   delay(100);
 }

@@ -1,7 +1,7 @@
 #include "water_check.hpp"
 
 water_check::water_check() {
-  // Beginn des trinkintervalls
+  // beginn des Trinkintervalls
   startMillis = millis();
 }
 
@@ -26,6 +26,6 @@ void water_check::reset(double menge_in_g){
 
 void water_check::change_settings(double zielmenge, double zeit) {
   zielmenge_in_g = zielmenge * 1000;
-  // erhalten der zeit größe (min)
+  // Zeit in Millisecunden
   zeitintervall = (unsigned int)zeit * 60 * 1000;
   }
