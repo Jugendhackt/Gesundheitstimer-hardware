@@ -20,5 +20,4 @@ void netzwerk::Sendewasserstand(float wasser_in_g){
   } else {
     Serial.println("Failed to connect to server");
   }
-
 }

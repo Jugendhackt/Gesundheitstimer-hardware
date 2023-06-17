@@ -1,6 +1,6 @@
 //Datei erstellen mit den variablen 
-//const char* ssid = ""; const char* password = "";
-#include "wlan_zugang.h"
+const char* ssid = "jugendhackt"; const char* password = "jugendhackt23";
+//#include "wlan_zugang.h"
 #include <WiFi.h>
 #include "netzwerk.hpp"
 #include "ScaleReader.hpp"
@@ -28,18 +28,17 @@ void setup(){
   }
 
   Serial.println("Connected to WiFi");
-  
-
 }
 
 void loop(){
-  
   float zustand_in_g = scaleReader->readScale();
 
-  float poti_value = potentiometer->readPotentiometer();
-  Serial.println(poti_value);
-  //Serial.println("%");
+  auto [potentiometer_value, succeeded] = potentiometer->readPotentiometer(); // tuple kram
+  if (succeeded) {
+    Serial.print("succeeded: ");
+    Serial.println(potentiometer_value);
+  }
 
   netzwerksteuerung.Sendewasserstand(zustand_in_g);
-  delay(1000);
+  delay(100);
 }
