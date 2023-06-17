@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 //Datei erstellen mit den variablen onst char* ssid = ""; const char* password = "";
 #include "wlan_zugang.h"
 #include <WiFi.h>
 #include "netzwerk.hpp"
+#include "ScaleReader.hpp"
 
+ScaleReader* scaleReader;
 netzwerk netzwerksteuerung{};
+
 void setup(){
   Serial.begin(115200);
+  Serial.println();
+  Serial.println("Starting...");
+
+  scaleReader = new ScaleReader();
 
   WiFi.begin(ssid, password);
 
@@ -18,8 +26,7 @@ void setup(){
 }
 
 void loop(){
-  netzwerksteuerung.Sendewasserstand(233.5);
+  float zustand_in_g = scaleReader->readScale();
+  netzwerksteuerung.Sendewasserstand(zustand_in_g);
   delay(5000);
-
-  
 }
