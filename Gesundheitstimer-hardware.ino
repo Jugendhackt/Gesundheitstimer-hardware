@@ -18,7 +18,7 @@
    This is an example sketch on how to use this library
 */
 
-#include "libs/HX711_ADC/src/HX711_ADC.h"
+#include "libs/HX711_ADC/HX711_ADC.h"
 #if defined(ESP8266)|| defined(ESP32) || defined(AVR)
 #include <EEPROM.h>
 #endif
