@@ -41,5 +41,6 @@ void loop(){
   //Serial.println("%");
 
   netzwerksteuerung.Sendewasserstand(zustand_in_g);
+   netzwerksteuerung.Sendepotiwert(poti_value);
   delay(1000);
 }
