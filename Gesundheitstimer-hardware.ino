@@ -1,5 +1,5 @@
 //Datei erstellen mit den variablen 
-// const char* ssid = ""; const char* password = "";
+//const char* ssid = ""; const char* password = "";
 #include "wlan_zugang.h"
 #include <WiFi.h>
 #include "netzwerk.hpp"
@@ -37,9 +37,9 @@ void loop(){
   if (succeeded) {
     Serial.print("succeeded: ");
     Serial.println(potentiometer_value);
+    netzwerksteuerung.Sendepotiwert(potentiometer_value);
   }
 
   netzwerksteuerung.Sendewasserstand(zustand_in_g);
-  netzwerksteuerung.Sendepotiwert(poti_value);
   delay(100);
 }

@@ -68,8 +68,3 @@ void netzwerk::SendeAlarm (float _0_oder_1_){
   }
 
 }
-
-
-
-
->>>>>>> e7e22c7094906aa784ebe3c8c73ed3f6f4591533
