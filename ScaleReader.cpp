@@ -46,44 +46,32 @@ ScaleReader::ScaleReader():LoadCell{HX711_dout, HX711_sck} {
 	  }
 	}
 
-float ScaleReader::readScale() {
+std::tuple<bool,float> ScaleReader::readScale() {
 static boolean newDataReady = 0;
 	  const int serialPrintInterval = 0; //increase value to slow down serial print activity
 
 	  // check for new data/start next conversion:
-	  if (LoadCell.update()) newDataReady = true;
+	  if (LoadCell.update())
+     newDataReady = true;
 
 	  // get smoothed value from the dataset:
 	  if (newDataReady) {
 	    if (millis() > t + serialPrintInterval) {
 	      float i = LoadCell.getData();
+        if (i < 2) return {false, 0};
+        recentReads.append(i);
+        if (!filter(i)) 
+          return {false, 0};
 	      Serial.print("Load_cell output val: ");
 	      Serial.println(i);
 	      newDataReady = 0;
 	      t = millis();
-	      return i;
+	      return {true, i};
 	    }
 	  }
 }
-/*class ScaleReader {
-  private: 
-  	//pins
-	const int HX711_dout = 4;
-	const int HX711_sck = 5;  
-	const int calVal_eepromAdress = 0;
-	unsigned long t = 0;
-  HX711_ADC LoadCell;
 
-public:
-	//constructor
-	
-	//methods
-	float ScaleReader::readScale() {
-	  
-	}
-
-};
-
-*/
-
-//HX711 constructor:
+bool ScaleReader::filter(float v) {
+  float avg = recentReads.average();
+  return v - avg > 2;
+}
