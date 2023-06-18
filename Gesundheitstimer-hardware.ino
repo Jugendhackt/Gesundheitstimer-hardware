@@ -62,15 +62,18 @@ void loop() {
       netzwerksteuerung.SendeAlarm(1);
       break;
     case(genug_getrunken):
+      WaterCheck->reset(800.00);
+      Serial.println("reset to 800");
       break;
     case(trinken_nicht_noetig):
       if (read_succeeded) {
         netzwerksteuerung.Sendewasserstand(zustand_in_g);
       }
       break;
-      
-  }
+  }/*
   static unsigned int lastTime = millis();
   while (millis() - lastTime > 100) delay(1);
   lastTime = millis();
+  */
+  //delay(200);
 }

@@ -16,5 +16,5 @@ private:
   HX711_ADC LoadCell;
   bool filter(float v);
   averageValue<float,2> recentReads;
-  bool lastIsZero;
+  bool lastIsSame = false;
 };
