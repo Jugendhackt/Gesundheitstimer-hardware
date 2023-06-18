@@ -58,8 +58,12 @@ static boolean newDataReady = 0;
 	  if (newDataReady) {
 	    if (millis() > t + serialPrintInterval) {
 	      float i = LoadCell.getData();
-        if (i < 2)
-          i = 0;
+        if (i < 2) {
+          if (lastIsZero) return {false, 0};
+          lastIsZero = true;
+          return {true,0};
+        }
+        lastIsZero = false;
         if (!filter(i)) 
           return {false, i};
         

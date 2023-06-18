@@ -54,6 +54,7 @@ void loop() {
     case(keine_Flasche_vorhanden):
       if (read_succeeded) {
         netzwerksteuerung.Sendewasserstand(LEER);
+        Serial.println("0 sent!");
       }
     case(Flasche_ist_leer):
       break;
@@ -69,6 +70,7 @@ void loop() {
       break;
       
   }
-
-  delay(200);
+  static unsigned int lastTime = millis();
+  while (millis() - lastTime > 100) delay(1);
+  lastTime = millis();
 }
