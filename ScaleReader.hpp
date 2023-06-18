@@ -2,6 +2,7 @@
 
 #include "average_value.hpp"
 #include "HX711_ADC.h"
+#include "cstdlib"
 
 class ScaleReader {
 public:
@@ -14,5 +15,5 @@ private:
 	unsigned long t = 0;
   HX711_ADC LoadCell;
   bool filter(float v);
-  averageValue<float,10> recentReads;
+  averageValue<float,2> recentReads;
 };

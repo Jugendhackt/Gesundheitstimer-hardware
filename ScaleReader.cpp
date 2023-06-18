@@ -58,10 +58,12 @@ static boolean newDataReady = 0;
 	  if (newDataReady) {
 	    if (millis() > t + serialPrintInterval) {
 	      float i = LoadCell.getData();
-        if (i < 2) return {false, 0};
-        recentReads.append(i);
+        if (i < 2)
+          i = 0;
         if (!filter(i)) 
-          return {false, 0};
+          return {false, i};
+        
+        recentReads.append(i);
 	      Serial.print("Load_cell output val: ");
 	      Serial.println(i);
 	      newDataReady = 0;
@@ -73,5 +75,5 @@ static boolean newDataReady = 0;
 
 bool ScaleReader::filter(float v) {
   float avg = recentReads.average();
-  return v - avg > 2;
+  return abs(v - avg) > 2;
 }
