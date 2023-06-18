@@ -56,7 +56,6 @@ void loop() {
         netzwerksteuerung.Sendewasserstand(LEER);
         Serial.println("0 sent!");
       }
-    case(Flasche_ist_leer):
       break;
     case(Schlage_Alarm):
       netzwerksteuerung.SendeAlarm(1);
@@ -65,6 +64,7 @@ void loop() {
       WaterCheck->reset(800.00);
       Serial.println("reset to 800");
       break;
+    case (Flasche_ist_leer):
     case(trinken_nicht_noetig):
       if (read_succeeded) {
         netzwerksteuerung.Sendewasserstand(zustand_in_g);
