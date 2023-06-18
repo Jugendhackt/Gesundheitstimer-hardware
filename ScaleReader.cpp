@@ -47,34 +47,24 @@ ScaleReader::ScaleReader():LoadCell{HX711_dout, HX711_sck} {
 	}
 
 std::tuple<bool,float> ScaleReader::readScale() {
-static boolean newDataReady = 0;
-	  const int serialPrintInterval = 0; //increase value to slow down serial print activity
-
-	  // check for new data/start next conversion:
-	  if (LoadCell.update())
-     newDataReady = true;
-
-	  // get smoothed value from the dataset:
-	  if (newDataReady) {
-	    if (millis() > t + serialPrintInterval) {
-	      float i = LoadCell.getData();
-        if (i < 2) {
-          if (lastIsZero) return {false, 0};
-          lastIsZero = true;
-          return {true,0};
-        }
-        lastIsZero = false;
-        if (!filter(i)) 
-          return {false, i};
-        
-        recentReads.append(i);
-	      Serial.print("Load_cell output val: ");
-	      Serial.println(i);
-	      newDataReady = 0;
-	      t = millis();
-	      return {true, i};
-	    }
-	  }
+  // get smoothed value from the dataset:
+  if (LoadCell.update()) {
+    float i = LoadCell.getData();
+    if (i < 2) {
+      i = 0;
+    }
+    if (!filter(i)) {
+      if (lastIsSame) return {false, i};
+      lastIsSame = true;
+      return {true, i};
+    }
+    lastIsSame = false;
+    recentReads.append(i);
+    Serial.print("Load_cell output val: ");
+    Serial.println(i);
+    return {false, i};
+  }
+  return {false, recentReads[0]};
 }
 
 bool ScaleReader::filter(float v) {
